@@ -18,8 +18,8 @@ func tampilkanMenu(){
 	fmt.Println(" 2. Tambah Tagihan Baru")
 	fmt.Println(" 3. Edit Tagihan")
 	fmt.Println(" 4. Hapus Tagihan")
+	fmt.Println(" 5. Cari Tagihan")
 	fmt.Println("----------------------------")
-	fmt.Println(" 5. Cari Tagihan (Coming Soon)")
 	fmt.Println(" 6. Urutkan Tagihan (Coming Soon)")
 	fmt.Println(" 7. Statistik Tagihan (Coming Soon)")
 	fmt.Println("----------------------------")
@@ -59,8 +59,12 @@ func main(){
 
 		case 4:
 			hapusTagihan(&dataTagihan)
+
 		
-		case 5, 6, 7:
+		case 5:
+			cariTagihan(dataTagihan)
+
+		case 6, 7:
 			fmt.Println("Fitur ini akan tersedia dalam waktu dekat!")
 
 		case 0:
