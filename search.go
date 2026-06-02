@@ -36,7 +36,7 @@ func binarySearch(data daftarTagihan, field, keyword string)daftarTagihan{
 	copy(sorted, data)
 
 	sort.Slice(sorted, func(i, j int) bool {
-		return strings.ToLower(getField(sorted[i], field)) < strings.ToLower(getField(sorted[i], field))
+		return strings.ToLower(getField(sorted[i], field)) < strings.ToLower(getField(sorted[j], field))
 	})
 
 	keyword = strings.ToLower(keyword)
