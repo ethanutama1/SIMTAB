@@ -29,12 +29,14 @@ func tampilSemua(data daftarTagihan){
 	fmt.Println(strings.Repeat("=", 85))
 
 	for _, t := range data{
-		statusIcon := "Belum Lunas"
+		statusText := t.Status
 		if t.Status == "Lunas"{
-			statusIcon = "[✅]"
+			statusText = "Lunas"
+		}else{
+			statusText = "Belum Lunas"
 		}
-		fmt.Printf(" %-4d %-20s %-15.0f %-14s %s %-10s %-12s\n",
-			t.ID, t.Nama, t.Nominal, t.JatuhTempo, statusIcon, t.Status, t.Kategori)
+		fmt.Printf(" %-4d %-20s %-15.0f %-14s %-15s %-12s\n",
+			t.ID, t.Nama, t.Nominal, t.JatuhTempo, statusText, t.Kategori)
 	}
 	fmt.Println(strings.Repeat("=", 85))
 }
@@ -111,7 +113,6 @@ func cariIndexByID(data daftarTagihan, id int)int{
 	}
 	return -1
 }
-
 
 
 func ubahTagihan(data *daftarTagihan){
@@ -227,4 +228,3 @@ func hapusTagihan(data *daftarTagihan){
 	*data = append((*data)[:idx], (*data)[idx+1:]...)
 	fmt.Printf("\nTagihan '%s' berhasil dihapus!\n", namaHapus)
 }
-
