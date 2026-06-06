@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
 var scanner = bufio.NewScanner(os.Stdin)
@@ -14,6 +15,25 @@ func bacaInput(prompt string) string{
 	fmt.Print(prompt)
 	scanner.Scan()
 	return strings.TrimSpace(scanner.Text())
+}
+
+func bacaTanggal(prompt string)string{
+	for {
+		input := bacaInput(prompt)
+		if input == ""{
+			return input
+		}
+		_, err := time.Parse("2006-01-02", input)
+		if err == nil{
+			return input	
+		}
+		fmt.Println("Format tanggal salah! Gunakan format YYYY-MM-DD (Contoh: 2025-10-04)")
+	}
+}
+
+func parseDate(tgl string) time.Time{
+	t, _ := time.Parse("2006-01-02", tgl)
+	return t
 }
 
 func tampilSemua(data daftarTagihan){
@@ -31,9 +51,9 @@ func tampilSemua(data daftarTagihan){
 	for _, t := range data{
 		statusText := t.Status
 		if t.Status == "Lunas"{
-			statusText = "Lunas"
+			statusText = t.Status
 		}else{
-			statusText = "Belum Lunas"
+			statusText = "Belum lunas"
 		}
 		fmt.Printf(" %-4d %-20s %-15.0f %-14s %-15s %-12s\n",
 			t.ID, t.Nama, t.Nominal, t.JatuhTempo, statusText, t.Kategori)
@@ -65,7 +85,7 @@ func tambahTagihan(data *daftarTagihan, nextID *int){
 	}
 
 	//	----Masukkan waktu jatuh tempo
-	jatuhTempo := bacaInput("Jatuh Tempo: ")
+	jatuhTempo := bacaTanggal("Jatuh Tempo: ")
 	if jatuhTempo == ""{
 		fmt.Println("Waktu jatuh tempo tidak boleh kosong!")
 		return
@@ -160,12 +180,12 @@ func ubahTagihan(data *daftarTagihan){
 		if err == nil && nominalBaru > 0{
 			t.Nominal = nominalBaru
 		}else{
-			fmt.Println("Nominal tidak valid!")
+			fmt.Println("Nominal tidak valid, nominal tidak diubah.")
 		}
 	}
 
 	//  ----Masukkan waktu jatuh tempo yang baru
-	jatuhTempoBaru := bacaInput("Jatuh tempo baru: ")
+	jatuhTempoBaru := bacaTanggal("Jatuh tempo baru: ")
 	if jatuhTempoBaru != ""{
 		t.JatuhTempo = jatuhTempoBaru
 	}
@@ -174,8 +194,8 @@ func ubahTagihan(data *daftarTagihan){
 	fmt.Println("Status : 1. Belum lunas 2. Lunas (Enter = skip)")
 	pilihStatus := bacaInput("Pilih (1/2): ")
 	if pilihStatus == "1"{
-		t.Status = "Belum Lunas"
-	}else{
+		t.Status = "Belum lunas"
+	}else if pilihStatus == "2"{
 		t.Status = "Lunas"
 	}
 
