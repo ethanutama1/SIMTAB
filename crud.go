@@ -193,9 +193,10 @@ func ubahTagihan(data *daftarTagihan){
 	//	----Masukkan status tagihan yang baru
 	fmt.Println("Status : 1. Belum lunas 2. Lunas (Enter = skip)")
 	pilihStatus := bacaInput("Pilih (1/2): ")
-	if pilihStatus == "1"{
+	switch pilihStatus{
+	case "1":
 		t.Status = "Belum lunas"
-	}else if pilihStatus == "2"{
+	case "2":
 		t.Status = "Lunas"
 	}
 
@@ -269,7 +270,6 @@ func tampilkanStatistik(data daftarTagihan) {
 			totalLunas += t.Nominal
 			jumlahLunas++
 		} else {
-			// Jika statusnya bukan "Lunas", maka dianggap "Belum lunas"
 			totalBelumLunas += t.Nominal
 			jumlahBelumLunas++
 		}

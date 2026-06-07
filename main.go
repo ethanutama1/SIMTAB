@@ -21,9 +21,7 @@ import (
 		fmt.Println(" 4. Hapus Tagihan")
 		fmt.Println(" 5. Cari Tagihan")
 		fmt.Println(" 6. Urutkan Tagihan")
-		fmt.Println("----------------------------")
-		fmt.Println(" 7. Statistik Tagihan (Coming Soon)")
-		fmt.Println("----------------------------")
+		fmt.Println(" 7. Statistik Tagihan")
 		fmt.Println(" 0. Keluar")
 		fmt.Print("\n Pilih menu: ")
 	}
