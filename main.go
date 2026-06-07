@@ -67,7 +67,7 @@ import (
 				urutkanTagihan(&dataTagihan)
 
 			case 7:
-				fmt.Println("Fitur ini akan tersedia dalam waktu dekat!")
+				tampilkanStatistik(dataTagihan)
 
 			case 0:
 				fmt.Println("\n Terima kasih sudah menggunakan SIMTAB!")

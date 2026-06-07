@@ -248,3 +248,40 @@ func hapusTagihan(data *daftarTagihan){
 	*data = append((*data)[:idx], (*data)[idx+1:]...)
 	fmt.Printf("\nTagihan '%s' berhasil dihapus!\n", namaHapus)
 }
+
+func tampilkanStatistik(data daftarTagihan) {
+	if len(data) == 0 {
+		fmt.Println("\nBelum ada data tagihan untuk dihitung statistiknya!")
+		return
+	}
+
+	var totalKeseluruhan float64
+	var totalLunas float64
+	var totalBelumLunas float64
+	var jumlahLunas int
+	var jumlahBelumLunas int
+
+	// Menghitung statistik berdasarkan status dan nominal tagihan
+	for _, t := range data {
+		totalKeseluruhan += t.Nominal
+		
+		if t.Status == "Lunas" {
+			totalLunas += t.Nominal
+			jumlahLunas++
+		} else {
+			// Jika statusnya bukan "Lunas", maka dianggap "Belum lunas"
+			totalBelumLunas += t.Nominal
+			jumlahBelumLunas++
+		}
+	}
+
+	fmt.Println("\n" + strings.Repeat("=", 40))
+	fmt.Println("	  STATISTIK TAGIHAN")
+	fmt.Println(strings.Repeat("=", 40))
+	fmt.Printf(" Total Semua Tagihan : %d Tagihan\n", len(data))
+	fmt.Printf(" Total Nominal       : Rp %.0f\n", totalKeseluruhan)
+	fmt.Println(strings.Repeat("-", 40))
+	fmt.Printf(" Lunas               : %d Tagihan (Rp %.0f)\n", jumlahLunas, totalLunas)
+	fmt.Printf(" Belum Lunas         : %d Tagihan (Rp %.0f)\n", jumlahBelumLunas, totalBelumLunas)
+	fmt.Println(strings.Repeat("=", 40))
+}
